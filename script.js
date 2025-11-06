@@ -3,7 +3,6 @@ const username = document.getElementById('username');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const confirmPassword = document.getElementById('confirmPassword');
-
 const usernameError = document.getElementById('usernameError');
 const emailError = document.getElementById('emailError');
 const passwordError = document.getElementById('passwordError');
@@ -27,7 +26,7 @@ function validateUsername() {
         return false;
     }
     if (username.value.length < 3) {
-        usernameError.textContent = "At least 3 charaters";
+        usernameError.textContent = "Need at least 3 charaters";
         return false;
     }
         usernameError.textContent = "";
@@ -37,7 +36,7 @@ function validateUsername() {
 
 function validateEmail() {
     if (email.value.trim() === "") {
-        emailError.textContent = "Email is required.";
+        emailError.textContent = "Email required.";
         return false;
   }
     if (!email.checkValidity()) {
@@ -56,21 +55,20 @@ function validatePassword() {
   const hasNumber = /\d/.test(value);
 
     if (value === "") {
-        passwordError.textContent = "Password is required.";
+        passwordError.textContent = "Password required.";
         return false;
   }
     if (value.length < 8) {
-        passwordError.textContent = "At least 8 characters.";
+        passwordError.textContent = "Need at least 8 characters.";
         return false;
   }
     if (!hasUpper || !hasLower || !hasNumber) {
-        passwordError.textContent = "Add UPPER, lower, and a number.";
+        passwordError.textContent = "Add upper, lower, and a number.";
         return false;
   }
         passwordError.textContent = "";
         return true;
 }
-
 function validateConfirm() {
     if (confirmPassword.value === "") {
         confirmPasswordError.textContent = "Please confirm your password.";
@@ -83,3 +81,40 @@ function validateConfirm() {
         confirmPasswordError.textContent = "";
         return true;
 }
+
+
+
+
+username.addEventListener("input", validateUsername);
+email.addEventListener("input", validateEmail);
+password.addEventListener("input", () => {
+  validatePassword();
+  validateConfirm();
+});
+confirmPassword.addEventListener("input", validateConfirm);
+
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const checkUser = validateUsername();
+  const checkEmail = validateEmail();
+  const checkPass = validatePassword();
+  const checkConfirm = validateConfirm()
+
+  if (!checkUser || !checkEmail || !checkPass || !checkConfirm) {
+        if (!checkUser) username.focus()
+        else if (!checkEmail) email.focus();
+        else if (!checkPass) password.focus()
+        else confirmPassword.focus();
+        return;
+    }
+localStorage.setItem("username", username.value);
+alert("Registration successful! Username saved.");
+form.reset();
+
+usernameError.textContent = "";
+emailError.textContent = "";
+passwordError.textContent = "";
+confirmPasswordError.textContent = "";
+})
+
+  
