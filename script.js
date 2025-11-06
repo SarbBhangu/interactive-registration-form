@@ -19,3 +19,14 @@ document.addEventListener('DOMContentLoaded' , ()=> {
         console.log("No username found in localStorage yet.");
     }
 })
+
+function validateUsername() {
+    if (username.value.trim() === "") {
+        usernameError.textContent = "Username is required";
+        return false;
+    }
+    if (username.value.length < 3) {
+        usernameError.textContent = "At least 3 charaters";
+        return false;
+    }
+}
