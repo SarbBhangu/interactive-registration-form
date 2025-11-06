@@ -49,3 +49,37 @@ function validateEmail() {
 }
 
 
+function validatePassword() {
+  const value = password.value;
+  const hasUpper = /[A-Z]/.test(value);
+  const hasLower = /[a-z]/.test(value);
+  const hasNumber = /\d/.test(value);
+
+    if (value === "") {
+        passwordError.textContent = "Password is required.";
+        return false;
+  }
+    if (value.length < 8) {
+        passwordError.textContent = "At least 8 characters.";
+        return false;
+  }
+    if (!hasUpper || !hasLower || !hasNumber) {
+        passwordError.textContent = "Add UPPER, lower, and a number.";
+        return false;
+  }
+        passwordError.textContent = "";
+        return true;
+}
+
+function validateConfirm() {
+    if (confirmPassword.value === "") {
+        confirmPasswordError.textContent = "Please confirm your password.";
+        return false;
+  }
+    if (confirmPassword.value !== password.value) {
+        confirmPasswordError.textContent = "Passwords do not match.";
+        return false;
+  }
+        confirmPasswordError.textContent = "";
+        return true;
+}
