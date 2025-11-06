@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded' , ()=> {
     }
 })
 
+
 function validateUsername() {
     if (username.value.trim() === "") {
         usernameError.textContent = "Username is required";
@@ -29,4 +30,22 @@ function validateUsername() {
         usernameError.textContent = "At least 3 charaters";
         return false;
     }
+        usernameError.textContent = "";
+        return true;
 }
+
+
+function validateEmail() {
+    if (email.value.trim() === "") {
+        emailError.textContent = "Email is required.";
+        return false;
+  }
+    if (!email.checkValidity()) {
+        emailError.textContent = "Please enter a valid email.";
+        return false;
+  }
+        emailError.textContent = "";
+        return true;
+}
+
+
