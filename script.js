@@ -108,7 +108,7 @@ form.addEventListener("submit", (event) => {
         return;
     }
 localStorage.setItem("username", username.value);
-alert("Registration successful! Username saved.");
+alert("Username saved.");
 form.reset();
 
 usernameError.textContent = "";
